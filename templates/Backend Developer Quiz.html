@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Developer Quiz</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            background-color: white;
+            padding: 30px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #0047ab;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .question p {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .options label {
+            display: block;
+            margin: 8px 0;
+            font-size: 16px;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #0047ab;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #003386;
+        }
+        .redirect-btn {
+            width: auto;
+            margin-top: 20px;
+            text-align: center;
+            background-color: #0073e6;
+        }
+        .redirect-btn a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            display: inline-block;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .redirect-btn a:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Backend Developer Quiz</h2>
+    <form id="quizForm">
+        <!-- Questions will be inserted here -->
+    </form>
+    <button type="button" onclick="submitQuiz()">Submit Quiz</button>
+
+    <!-- Redirect Button -->
+    <div class="redirect-btn">
+        <a href="/resources">Search for Resources</a>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { 
+            question: "1. Which HTTP method is typically used to update an existing resource?", 
+            options: ["GET", "POST", "PUT", "DELETE"], 
+            correct: "PUT" 
+        },
+        { 
+            question: "2. Which of the following is a NoSQL database?", 
+            options: ["MySQL", "PostgreSQL", "MongoDB", "SQLite"], 
+            correct: "MongoDB" 
+        },
+        { 
+            question: "3. Which Python module is used to interact with an SQLite database?", 
+            options: ["sqlite3", "sqlalchemy", "mysql-connector", "pymongo"], 
+            correct: "sqlite3" 
+        },
+        { 
+            question: "4. What is the primary key in a relational database?", 
+            options: ["A unique identifier for each row", "A foreign key reference", "A query optimizer", "A storage index"], 
+            correct: "A unique identifier for each row" 
+        },
+        { 
+            question: "5. Which tool is commonly used for managing dependencies in Node.js projects?", 
+            options: ["npm", "pip", "composer", "maven"], 
+            correct: "npm" 
+        },
+        { 
+            question: "6. In REST, what does CRUD stand for?", 
+            options: ["Create, Read, Update, Delete", "Compile, Run, Upgrade, Deploy", "Cache, Resolve, Unload, Debug", "Connect, Route, Upload, Download"], 
+            correct: "Create, Read, Update, Delete" 
+        },
+        { 
+            question: "7. Which of the following is NOT a backend framework?", 
+            options: ["Django", "Spring", "Flask", "React"], 
+            correct: "React" 
+        },
+        { 
+            question: "8. What is the default port for HTTP?", 
+            options: ["21", "22", "80", "443"], 
+            correct: "80" 
+        },
+        { 
+            question: "9. Which Python library is used to handle JSON data?", 
+            options: ["json", "pickle", "xml", "csv"], 
+            correct: "json" 
+        },
+        { 
+            question: "10. In Node.js, which method is used to create a new server?", 
+            options: ["http.createServer()", "http.newServer()", "server.start()", "server.create()"], 
+            correct: "http.createServer()" 
+        },
+        { 
+            question: "11. What is the result of '2' + 2 in JavaScript?", 
+            options: ["22", "4", "undefined", "NaN"], 
+            correct: "22" 
+        },
+        { 
+            question: "12. Which SQL clause is used to filter the results?", 
+            options: ["WHERE", "SELECT", "ORDER BY", "GROUP BY"], 
+            correct: "WHERE" 
+        },
+        { 
+            question: "13. What does the 'this' keyword refer to in JavaScript?", 
+            options: ["Global object", "The current object context", "Window object", "Prototype object"], 
+            correct: "The current object context" 
+        },
+        { 
+            question: "14. In REST APIs, what does the response code 404 indicate?", 
+            options: ["Bad Request", "Unauthorized", "Not Found", "Internal Server Error"], 
+            correct: "Not Found" 
+        },
+        { 
+            question: "15. What is the difference between PUT and PATCH in HTTP?", 
+            options: [
+                "PUT updates the entire resource, PATCH updates a part of the resource", 
+                "PUT is idempotent, PATCH is not", 
+                "PATCH creates a new resource, PUT does not", 
+                "They are identical in function"
+            ], 
+            correct: "PUT updates the entire resource, PATCH updates a part of the resource" 
+        }
+    ];
+
+    const form = document.getElementById("quizForm");
+    questions.forEach((q, index) => {
+        const questionDiv = document.createElement("div");
+        questionDiv.classList.add("question");
+        const optionsHtml = q.options.map(
+            (opt, idx) => `<label><input type="radio" name="q${index}" value="${opt}" required> ${opt}</label>`
+        ).join("");
+        questionDiv.innerHTML = `<p>${q.question}</p><div class="options">${optionsHtml}</div>`;
+        form.appendChild(questionDiv);
+    });
+
+    function submitQuiz() {
+        let score = 0;
+        questions.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            if (selected && selected.value === q.correct) score++;
+        });
+        const total = questions.length;
+        const percentage = (score / total) * 100;
+        const message = percentage >= 80 
+            ? `Congratulations! You passed with a score of ${score}/${total}.` 
+            : `You failed with a score of ${score}/${total}. Better luck next time!`;
+        alert(message);
+    }
+</script>
+
+</body>
+</html>

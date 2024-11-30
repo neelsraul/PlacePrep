@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analyst Quiz</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f8ff;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        .question input {
+            margin-right: 10px;
+        }
+        .button-container {
+            text-align: center;
+        }
+        .result {
+            font-size: 20px;
+            font-weight: bold;
+            color: #008080;
+            text-align: center;
+            margin-top: 20px;
+        }
+        canvas {
+            max-width: 100%;
+            margin-top: 20px;
+            height: 250px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Data Analyst Quiz</h2>
+
+<div class="quiz-container">
+    <form id="quizForm">
+        <!-- Question 1 -->
+        <div class="question">
+            <label>1. Which technique is best for handling missing values in a dataset with many features?</label><br>
+            <input type="radio" name="q1" value="a"> a) Deleting rows with missing values<br>
+            <input type="radio" name="q1" value="b"> b) Imputing with mean, median, or mode<br>
+            <input type="radio" name="q1" value="c"> c) Filling missing values with zeros<br>
+            <input type="radio" name="q1" value="d"> d) Dropping columns with missing values<br>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <label>2. Which method scales data to a mean of 0 and standard deviation of 1?</label><br>
+            <input type="radio" name="q2" value="a"> a) Min-Max Scaling<br>
+            <input type="radio" name="q2" value="b"> b) Z-score Normalization<br>
+            <input type="radio" name="q2" value="c"> c) Decimal Scaling<br>
+            <input type="radio" name="q2" value="d"> d) Log Transformation<br>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <label>3. What does a Pearson correlation coefficient of 0.9 indicate?</label><br>
+            <input type="radio" name="q3" value="a"> a) Strong negative linear relationship<br>
+            <input type="radio" name="q3" value="b"> b) Weak negative linear relationship<br>
+            <input type="radio" name="q3" value="c"> c) Strong positive linear relationship<br>
+            <input type="radio" name="q3" value="d"> d) No linear relationship<br>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <label>4. What is an effective method to detect outliers in a dataset?</label><br>
+            <input type="radio" name="q4" value="a"> a) Correlation matrix<br>
+            <input type="radio" name="q4" value="b"> b) Boxplot and IQR<br>
+            <input type="radio" name="q4" value="c"> c) Z-score normalization<br>
+            <input type="radio" name="q4" value="d"> d) Checking data skewness<br>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <label>5. In hypothesis testing, the p-value represents:</label><br>
+            <input type="radio" name="q5" value="a"> a) Probability null hypothesis is true<br>
+            <input type="radio" name="q5" value="b"> b) Probability of the observed data given the null hypothesis<br>
+            <input type="radio" name="q5" value="c"> c) Significance level<br>
+            <input type="radio" name="q5" value="d"> d) Alternative hypothesis probability<br>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+            <label>6. What is the purpose of scaling data in machine learning?</label><br>
+            <input type="radio" name="q6" value="a"> a) To reduce memory usage<br>
+            <input type="radio" name="q6" value="b"> b) To improve model interpretability<br>
+            <input type="radio" name="q6" value="c"> c) To ensure all features contribute equally<br>
+            <input type="radio" name="q6" value="d"> d) To remove outliers<br>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+            <label>7. Best chart to visualize the distribution of a single continuous variable?</label><br>
+            <input type="radio" name="q7" value="a"> a) Scatter plot<br>
+            <input type="radio" name="q7" value="b"> b) Bar chart<br>
+            <input type="radio" name="q7" value="c"> c) Histogram<br>
+            <input type="radio" name="q7" value="d"> d) Line chart<br>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question">
+            <label>8. Best test for comparing means of two independent groups?</label><br>
+            <input type="radio" name="q8" value="a"> a) Chi-square test<br>
+            <input type="radio" name="q8" value="b"> b) Paired t-test<br>
+            <input type="radio" name="q8" value="c"> c) Independent t-test<br>
+            <input type="radio" name="q8" value="d"> d) ANOVA<br>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question">
+            <label>9. An example of feature engineering is:</label><br>
+            <input type="radio" name="q9" value="a"> a) Removing rows with missing values<br>
+            <input type="radio" name="q9" value="b"> b) Scaling numerical values<br>
+            <input type="radio" name="q9" value="c"> c) Creating new features like polynomial features<br>
+            <input type="radio" name="q9" value="d"> d) Imputing missing values<br>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question">
+            <label>10. A p-value < 0.05 typically suggests:</label><br>
+            <input type="radio" name="q10" value="a"> a) Null hypothesis is true<br>
+            <input type="radio" name="q10" value="b"> b) Null hypothesis is rejected<br>
+            <input type="radio" name="q10" value="c"> c) Insufficient evidence<br>
+            <input type="radio" name="q10" value="d"> d) Alternative hypothesis is rejected<br>
+        </div>
+
+        <div class="button-container">
+            <button type="button" onclick="submitQuiz()">Submit</button>
+        </div>
+    </form>
+
+    <div id="result" class="result"></div>
+    <canvas id="scoreChart" width="300" height="250"></canvas>
+</div>
+
+<script>
+    function submitQuiz() {
+        let score = 0;
+        const answers = ['c', 'b', 'c', 'b', 'b', 'c', 'c', 'c', 'c', 'b'];
+
+        // Checking answers for each question
+        for (let i = 0; i < 10; i++) {
+            const selected = document.querySelector(`input[name="q${i+1}"]:checked`);
+            if (selected && selected.value === answers[i]) {
+                score++;
+            }
+        }
+
+        // Display score result
+        document.getElementById('result').innerHTML = `Your score: ${score}/10. ` +
+            (score >= 6 ? "You are suitable for Data Analysis!" : "You need more practice.");
+
+        // Display radar chart
+        displayGraph(score);
+    }
+
+    function displayGraph(score) {
+        const ctx = document.getElementById('scoreChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Data Preprocessing', 'Data Visualization', 'Statistics', 'Feature Engineering', 'Hypothesis Testing'],
+                datasets: [{

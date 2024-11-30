@@ -1,0 +1,228 @@
+/* Global Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(120deg, #f7f7f7 50%, #ffffff 50%);
+    color: #333;
+    padding-top: 80px; /* To avoid overlap with the navbar */
+    transition: all 0.3s ease-in-out;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: #444;
+    letter-spacing: 1px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Navbar */
+.navbar {
+    background: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem 2rem;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    color: #444 !important;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.navbar-nav .nav-link {
+    color: #555 !important;
+    font-size: 1rem;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007BFF !important;
+}
+
+.navbar-toggler {
+    border: none;
+    outline: none;
+}
+
+.navbar-toggler-icon {
+    background-color: #555;
+    width: 24px;
+    height: 3px;
+    border-radius: 2px;
+    display: block;
+}
+
+/* Jumbotron (Home Page) */
+.jumbotron {
+    background: #f8f9fa;
+    padding: 4rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.jumbotron h1 {
+    font-size: 2.5rem;
+    color: #333;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+}
+
+.jumbotron p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.jumbotron a {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.8rem 2rem;
+    color: #fff;
+    background: #007BFF;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+}
+
+.jumbotron a:hover {
+    background: #0056b3;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Forms */
+form {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 0.5rem;
+}
+
+form input,
+form button {
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    color: #444;
+}
+
+form button {
+    background: #007BFF;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+form button:hover {
+    background: #0056b3;
+    transform: scale(1.02);
+}
+
+/* Table */
+.table {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+.table th {
+    background: #007BFF;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+}
+
+.table td {
+    padding: 1rem;
+    border: 1px solid #e5e5e5;
+    text-align: center;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background: #f9f9f9;
+}
+
+.table-striped tbody tr:hover {
+    background: #f0f0f0;
+}
+
+/* Buttons */
+.btn {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    background: #f8f9fa;
+    padding: 2rem 0;
+    text-align: center;
+    color: #555;
+    border-top: 2px solid #e5e5e5;
+}
+
+footer a {
+    color: #007BFF;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #0056b3;
+}
+
+/* Spinner */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border-width: 0.3rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1, h2 {
+        font-size: 1.8rem;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 0.9rem;
+    }
+
+    .jumbotron {
+        padding: 2rem;
+    }
+}

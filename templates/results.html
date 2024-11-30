@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Job Recommendation</h1>
+    
+    {% if recommendation %}
+        <p>Your recommended job role is: <strong>{{ recommendation }}</strong></p>
+        {% if resume.upload_date %}
+            <p><strong>Uploaded on:</strong> {{ resume.upload_date.strftime('%Y-%m-%d %H:%M') }}</p>
+        {% endif %}
+        <form action="{{ quiz_url }}" method="get">
+            <button type="submit" class="btn btn-primary">Take Test</button>
+        </form>
+    {% else %}
+        <p>No recommendations available.</p>
+    {% endif %}
+</div>
+{% endblock %}

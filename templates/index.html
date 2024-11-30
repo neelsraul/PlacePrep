@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Welcome Section -->
+<div class="jumbotron text-center">
+    <h1 class="display-4" style="color: #0047ab;">Welcome to Placement Portal</h1>
+    <p class="lead" style="color: #333;">Upload your resume and get personalized job domain recommendations.</p>
+    
+    {% if not current_user.is_authenticated %}
+    <hr class="my-4" style="border-top: 2px solid #0047ab;">
+    <a class="btn btn-primary btn-lg" href="{{ url_for('auth.register') }}" role="button" style="background-color: #0047ab; border: none;">Get Started</a>
+    {% else %}
+    <hr class="my-4" style="border-top: 2px solid #0047ab;">
+    <a class="btn btn-primary btn-lg" href="{{ url_for('dashboard') }}" role="button" style="background-color: #0047ab; border: none;">Go to Dashboard</a>
+    {% endif %}
+</div>
+
+<!-- Upcoming Placements Section -->
+<div class="container mt-5">
+    <h2 style="color: #0047ab;">Upcoming Companies for Placement</h2>
+    <table class="table table-striped mt-3">
+        <thead style="background-color: #0047ab; color: white;">
+            <tr>
+                <th>Company</th>
+                <th>Job Role</th>
+                <th>Package (CTC)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Google</td>
+                <td>Software Engineer</td>
+                <td>₹25 LPA</td>
+            </tr>
+            <tr>
+                <td>Microsoft</td>
+                <td>AI Engineer</td>
+                <td>₹12 LPA</td>
+            </tr>
+            <tr>
+                <td>Amazon</td>
+                <td>Data Analyst</td>
+                <td>₹9 LPA</td>
+            </tr>
+            <tr>
+                <td>TCS</td>
+                <td>Backend Developer</td>
+                <td>₹8 LPA</td>
+            </tr>
+            <tr>
+                <td>Infosys</td>
+                <td>System Engineer</td>
+                <td>₹6 LPA</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Upcoming Events Section -->
+<div class="container mt-5">
+    <h2 style="color: #0047ab;">Upcoming Events</h2>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card" style="border: 1px solid #0047ab;">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #0047ab;">SIGAI Hackathon</h5>
+                    <p class="card-text">Join us for an AI-focused hackathon on December 10, 2024. Hosted by SIGAI Committee.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card" style="border: 1px solid #0047ab;">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #0047ab;">Charity Drive</h5>
+                    <p class="card-text">Participate in our charity drive on December 15, 2024, organized by NSS Committee.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card" style="border: 1px solid #0047ab;">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #0047ab;">Seminar on Blockchain</h5>
+                    <p class="card-text">Attend a blockchain seminar on December 20, 2024, hosted by SIGBlockchain.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card" style="border: 1px solid #0047ab;">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #0047ab;">Resume Building Workshop</h5>
+                    <p class="card-text">Learn resume building techniques on January 5, 2025, conducted by Placement Cell.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card" style="border: 1px solid #0047ab;">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #0047ab;">Women in Tech Seminar</h5>
+                    <p class="card-text">Empowering women in tech on January 15, 2025, led by SIGTech.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

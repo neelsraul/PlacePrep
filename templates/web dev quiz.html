@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #0073e6;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+        .result {
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Web Development Quiz</h2>
+    <form id="quizForm">
+        <div class="question">
+            <label>1. Which of the following properties is used to align items along the cross-axis in Flexbox?</label>
+            <input type="radio" name="q1" value="a"> a) justify-content<br>
+            <input type="radio" name="q1" value="b"> b) align-items<br>
+            <input type="radio" name="q1" value="c"> c) align-self<br>
+            <input type="radio" name="q1" value="d"> d) flex-direction<br>
+        </div>
+
+        <div class="question">
+            <label>2. What will be the output of the following code?</label>
+            <pre>
+function outer() {
+    var x = 10;
+    return function inner() {
+        console.log(x);
+    }
+}
+var closureFunc = outer();
+closureFunc();
+            </pre>
+            <input type="radio" name="q2" value="a"> a) undefined<br>
+            <input type="radio" name="q2" value="b"> b) 10<br>
+            <input type="radio" name="q2" value="c"> c) Error<br>
+            <input type="radio" name="q2" value="d"> d) null<br>
+        </div>
+
+        <div class="question">
+            <label>3. Which HTML5 API allows web pages to store data in the user's browser for offline use?</label>
+            <input type="radio" name="q3" value="a"> a) Geolocation API<br>
+            <input type="radio" name="q3" value="b"> b) Web Storage API<br>
+            <input type="radio" name="q3" value="c"> c) Notification API<br>
+            <input type="radio" name="q3" value="d"> d) Web Workers API<br>
+        </div>
+
+        <div class="question">
+            <label>4. What will the following code output?</label>
+            <pre>
+let promise = new Promise(function(resolve, reject) {
+    resolve('Hello');
+    reject('World');
+});
+promise.then(function(value) {
+    console.log(value);
+}).catch(function(error) {
+    console.log(error);
+});
+            </pre>
+            <input type="radio" name="q4" value="a"> a) Hello<br>
+            <input type="radio" name="q4" value="b"> b) World<br>
+            <input type="radio" name="q4" value="c"> c) undefined<br>
+            <input type="radio" name="q4" value="d"> d) Error<br>
+        </div>
+
+        <div class="question">
+            <label>5. Which HTTP method is considered safe and idempotent?</label>
+            <input type="radio" name="q5" value="a"> a) GET<br>
+            <input type="radio" name="q5" value="b"> b) POST<br>
+            <input type="radio" name="q5" value="c"> c) DELETE<br>
+            <input type="radio" name="q5" value="d"> d) PUT<br>
+        </div>
+
+        <div class="question">
+            <label>6. Which CSS Grid property specifies the space a grid item should span?</label>
+            <input type="radio" name="q6" value="a"> a) grid-template-rows<br>
+            <input type="radio" name="q6" value="b"> b) grid-column<br>
+            <input type="radio" name="q6" value="c"> c) grid-gap<br>
+            <input type="radio" name="q6" value="d"> d) grid-template-columns<br>
+        </div>
+
+        <div class="question">
+            <label>7. In the JavaScript code below, what will the value of <code>this</code> be when <code>myObj.method()</code> is called?</label>
+            <pre>
+var myObj = {
+    name: "John",
+    method: function() {
+        console.log(this.name);
+    }
+};
+myObj.method();
+            </pre>
+            <input type="radio" name="q7" value="a"> a) undefined<br>
+            <input type="radio" name="q7" value="b"> b) myObj<br>
+            <input type="radio" name="q7" value="c"> c) window<br>
+            <input type="radio" name="q7" value="d"> d) null<br>
+        </div>
+
+        <div class="question">
+            <label>8. Which method allows writing asynchronous code that looks synchronous?</label>
+            <input type="radio" name="q8" value="a"> a) setTimeout()<br>
+            <input type="radio" name="q8" value="b"> b) async/await<br>
+            <input type="radio" name="q8" value="c"> c) setInterval()<br>
+            <input type="radio" name="q8" value="d"> d) Promise.all()<br>
+        </div>
+
+        <div class="question">
+            <label>9. What attack involves injecting scripts into web pages viewed by others?</label>
+            <input type="radio" name="q9" value="a"> a) Cross-Site Scripting (XSS)<br>
+            <input type="radio" name="q9" value="b"> b) Cross-Site Request Forgery (CSRF)<br>
+            <input type="radio" name="q9" value="c"> c) SQL Injection<br>
+            <input type="radio" name="q9" value="d"> d) Phishing<br>
+        </div>
+
+        <div class="question">
+            <label>10. Which media query applies styles for devices with a screen width of at least 768px?</label>
+            <input type="radio" name="q10" value="a"> a) @media (max-width: 768px)<br>
+            <input type="radio" name="q10" value="b"> b) @media (min-width: 768px)<br>
+            <input type="radio" name="q10" value="c"> c) @media (width: 768px)<br>
+            <input type="radio" name="q10" value="d"> d) @media (max-height: 768px)<br>
+        </div>
+
+        <button type="button" onclick="submitQuiz()">Submit Quiz</button>
+    </form>
+
+    <div id="result" class="result"></div>
+</div>
+
+<script>
+    function submitQuiz() {
+        let score = 0;
+        const answers = { 
+            q1: 'b', q2: 'b', q3: 'b', q4: 'a', 
+            q5: 'a', q6: 'b', q7: 'b', q8: 'b', 
+            q9: 'a', q10: 'b' 
+        };
+        
+        for (let key in answers) {
+            const selected = document.querySelector(`input[name="${key}"]:checked`);
+            if (selected && selected.value === answers[key]) score++;
+        }
+        
+        const resultText = score >= 7 ? "You are suitable for Web Development!" : "You need more practice.";
+        document.getElementById('result').textContent = `Your score: ${score}/10. ${resultText}`;
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">Your Resumes</h2>
+    <a href="{{ url_for('upload_resume') }}" class="btn btn-success mb-3">Upload New Resume</a>
+
+    <!-- Resumes Table -->
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Upload Date</th>
+                <th scope="col">Filename</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for resume in resumes %}
+            <tr>
+                <td>{{ resume.upload_date.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>{{ resume.filename }}</td>
+                <td>
+                    <a href="{{ url_for('view_resume', resume_id=resume.id) }}" class="btn btn-primary btn-sm">View Analysis</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3" class="text-center text-muted">No resumes uploaded yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

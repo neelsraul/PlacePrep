@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Job Recommendation</h1>
+
+    {% if recommendation %}
+        <p>Your recommended job role is: <strong>{{ recommendation }}</strong></p>
+        {% if resume.upload_date %}
+            <p><strong>Uploaded on:</strong> {{ resume.upload_date.strftime('%Y-%m-%d %H:%M') }}</p>
+        {% endif %}
+        
+        <button onclick="startQuiz('{{ recommendation }}')" class="btn btn-primary">Take Test</button>
+
+    {% else %}
+        <p>No recommendations available.</p>
+    {% endif %}
+</div>
+
+<script>
+    function startQuiz(jobRole) {
+        if (!jobRole) {
+            alert("Job role is missing. Cannot generate quiz.");
+            return;
+        }
+        // Redirect to dynamically generated quiz
+        window.location.href = `/quiz?job_role=${encodeURIComponent(jobRole)}`;
+    }
+</script>
+
+{% endblock %}

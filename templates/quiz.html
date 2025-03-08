@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AI-Generated Quiz</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const jobRole = "{{ job_role }}";  // Pass job role from Flask
+            fetch(`/get_quiz_questions?job_role=${jobRole}`)
+                .then(response => response.json())
+                .then(questions => {
+                    let quizContainer = document.getElementById("quiz-container");
+                    questions.forEach((q, index) => {
+                        let questionHtml = `
+                            <div class="question">
+                                <p><b>Q${index + 1}:</b> ${q.question}</p>
+                                ${q.options.map((option, i) => `
+                                    <label>
+                                        <input type="radio" name="q${index}" value="${option}">
+                                        ${option}
+                                    </label><br>
+                                `).join('')}
+                            </div>
+                        `;
+                        quizContainer.innerHTML += questionHtml;
+                    });
+                })
+                .catch(error => console.error("Error fetching quiz:", error));
+        });
+
+        function submitQuiz() {
+            let answers = {};
+            document.querySelectorAll("input[type=radio]:checked").forEach(input => {
+                answers[input.name] = input.value;
+            });
+
+            fetch("/check_answers", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(answers)
+            })
+            .then(response => response.json())
+            .then(result => alert(`Your Score: ${result.score}/15`))
+            .catch(error => console.error("Error submitting quiz:", error));
+        }
+    </script>
+</head>
+<body>
+    <h2>Quiz for {{ job_role }}</h2>
+    <div id="quiz-container"></div>
+    <button onclick="submitQuiz()">Submit Quiz</button>
+</body>
+</html>

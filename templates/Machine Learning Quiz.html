@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Quiz</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            background-color: white;
+            padding: 30px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #0047ab;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .question p {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .options label {
+            display: block;
+            margin: 8px 0;
+            font-size: 16px;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            padding: 15px;
+            background-color: #0047ab;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #003386;
+        }
+        .resource-btn {
+            background-color: #0073e6;
+        }
+        .resource-btn:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Machine Learning Quiz</h2>
+    <form id="quizForm">
+        <!-- Questions will be inserted here -->
+    </form>
+    <div class="buttons">
+        <button type="button" onclick="submitQuiz()">Submit Quiz</button>
+        <button type="button" class="resource-btn" onclick="redirectToResources()">Search for Resources</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { 
+            question: "1. What is the purpose of the training set in machine learning?", 
+            options: [
+                "To evaluate the model's accuracy", 
+                "To update hyperparameters", 
+                "To train the model by adjusting weights", 
+                "To validate the final model"
+            ], 
+            correct: "To train the model by adjusting weights"
+        },
+        { 
+            question: "2. Which algorithm is used for supervised learning?", 
+            options: ["K-Means", "Linear Regression", "DBSCAN", "PCA"], 
+            correct: "Linear Regression"
+        },
+        { 
+            question: "3. What is overfitting in machine learning?", 
+            options: [
+                "Model performing well on training data but poorly on test data", 
+                "Model underestimating both training and test data", 
+                "Achieving high bias and low variance", 
+                "Model working perfectly on test data"
+            ], 
+            correct: "Model performing well on training data but poorly on test data"
+        },
+        { 
+            question: "4. Which technique reduces overfitting in a decision tree?", 
+            options: ["Pruning", "Increasing depth", "Bagging", "Expanding leaves"], 
+            correct: "Pruning"
+        },
+        { 
+            question: "5. What is the primary purpose of the loss function?", 
+            options: [
+                "To measure the model's performance during training", 
+                "To initialize weights in the model", 
+                "To normalize the data", 
+                "To select the best model features"
+            ], 
+            correct: "To measure the model's performance during training"
+        },
+        { 
+            question: "6. What does the term 'gradient descent' mean?", 
+            options: [
+                "A method to increase model accuracy", 
+                "A process to minimize the loss function", 
+                "A clustering algorithm", 
+                "An approach to classify data points"
+            ], 
+            correct: "A process to minimize the loss function"
+        },
+        { 
+            question: "7. Which algorithm is used for classification problems?", 
+            options: ["K-Nearest Neighbors (KNN)", "K-Means", "DBSCAN", "PCA"], 
+            correct: "K-Nearest Neighbors (KNN)"
+        },
+        { 
+            question: "8. What is the role of 'regularization' in machine learning?", 
+            options: [
+                "To prevent underfitting", 
+                "To handle missing data", 
+                "To prevent overfitting by penalizing large weights", 
+                "To ensure high bias and low variance"
+            ], 
+            correct: "To prevent overfitting by penalizing large weights"
+        },
+        { 
+            question: "9. Which evaluation metric is best for imbalanced classification?", 
+            options: ["Accuracy", "Precision", "Recall", "F1-Score"], 
+            correct: "F1-Score"
+        },
+        { 
+            question: "10. What is the purpose of the validation set?", 
+            options: [
+                "To train the model", 
+                "To evaluate the model during training for hyperparameter tuning", 
+                "To generate the final predictions", 
+                "To store test data"
+            ], 
+            correct: "To evaluate the model during training for hyperparameter tuning"
+        }
+    ];
+
+    const form = document.getElementById("quizForm");
+    questions.forEach((q, index) => {
+        const questionDiv = document.createElement("div");
+        questionDiv.classList.add("question");
+        const optionsHtml = q.options.map(
+            (opt) => `<label><input type="radio" name="q${index}" value="${opt}" required> ${opt}</label>`
+        ).join("");
+        questionDiv.innerHTML = `<p>${q.question}</p><div class="options">${optionsHtml}</div>`;
+        form.appendChild(questionDiv);
+    });
+
+    function submitQuiz() {
+        let score = 0;
+        questions.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            if (selected && selected.value === q.correct) score++;
+        });
+        const total = questions.length;
+        const percentage = (score / total) * 100;
+        const message = percentage >= 80 
+            ? `Great job! You scored ${score}/${total}. Excellent performance!` 
+            : `Your score is ${score}/${total}. Keep practicing!`;
+        alert(message);
+    }
+
+    function redirectToResources() {
+        window.location.href = "/resources";
+    }
+</script>
+
+</body>
+</html>

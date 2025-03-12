@@ -5,7 +5,7 @@ import logging
 genai.configure(api_key="AIzaSyBdiTBiBBTNIacb1ZJVpbbicjJ-uLSSzek")
 
 def generate_quiz_questions(job_role):
-    genai.configure(api_key="YOUR_API_KEY")
+    genai.configure(api_key="AIzaSyBdiTBiBBTNIacb1ZJVpbbicjJ-uLSSzek")
     model = genai.GenerativeModel("gemini-1.5-pro")  # Ensure correct model name
 
     prompt = f"Generate a 15-question multiple-choice quiz for {job_role}. Each question should have 4 options with only one correct answer."

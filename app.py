@@ -1,6 +1,7 @@
 import os
 import pickle
 import logging
+import json
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from config import Config
 from extensions import db, login_manager
@@ -114,6 +115,41 @@ def view_resume(resume_id):
 
     return render_template("results.html", resume=resume, recommendation=recommendation)
 
+import re
+
+@app.route("/get_quiz_questions")
+@login_required
+def get_quiz_questions():
+    job_role = request.args.get("job_role", "")
+    if not job_role:
+        return jsonify({"error": "Job role is required"}), 400
+
+    logging.info(f"📝 Fetching quiz questions for: {job_role}")
+    quiz_response = generate_quiz_questions(job_role)
+
+    if not quiz_response:
+        return jsonify({"error": "Failed to generate quiz"}), 500
+
+    try:
+        questions = re.findall(r"\*\*(\d+)\.\s(.*?)\*\*(.*?)\n\n", quiz_response, re.DOTALL)
+        quiz_questions = []
+        for number, question, options_block in questions:
+            options = re.findall(r"[a-d]\)\s(.*)", options_block)
+            quiz_questions.append({
+                "question": question.strip(),
+                "options": options,
+                "correct_option": None  # Don't expose answers here!
+            })
+
+        session["quiz_questions"] = quiz_questions  # cache in session
+
+        return jsonify(quiz_questions)
+
+    except Exception as e:
+        logging.error(f"❌ Error processing quiz: {e}")
+        return jsonify({"error": "Quiz processing failed"}), 500
+
+
 @app.route("/quiz")
 @login_required
 def quiz():
@@ -132,26 +168,26 @@ def quiz():
 
     return render_template("quiz.html", quiz_questions=quiz_questions, job_role=job_role)
 
+from flask import session
+
 @app.route("/check_answers", methods=["POST"])
 @login_required
 def check_answers():
     data = request.json
-    job_role = data.get("job_role", "")
     user_answers = data.get("answers", {})
 
-    if not job_role:
-        return jsonify({"error": "Job role is missing"}), 400
+    quiz_questions = session.get('quiz_questions')
+    
+    if not quiz_questions:
+        return jsonify({"error": "Quiz session expired, please retry."}), 400
 
-    logging.info(f"✅ Checking quiz answers for job role: {job_role}")
-
-    # Get correct answers from Google Gemini API
-    quiz_questions = generate_quiz_questions(job_role)
+    # Example of correct_answers stored previously
     correct_answers = {f"q{index}": q["correct_option"] for index, q in enumerate(quiz_questions)}
 
-    # Calculate the user's score
     score = sum(1 for q, ans in user_answers.items() if correct_answers.get(q) == ans)
 
     return jsonify({"score": score, "correct_answers": correct_answers})
+
 
 @app.route("/upload", methods=["GET", "POST"])
 @login_required
